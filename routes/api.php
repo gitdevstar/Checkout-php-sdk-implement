@@ -20,5 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('/card',    [CardResource::class]);
+Route::resource('/card',    'CardResource');
 Route::post('/payment',     'CheckoutApi@payment');

@@ -54,9 +54,6 @@ class CardResource extends Controller
                 'number' => 'required',
                 'month' => 'required',
                 'year' => 'required',
-                'cvv' => 'required',
-                'holder' => 'required',
-
             ]);
 
         try{
