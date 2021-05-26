@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\Resource\CardResource;
-use Checkout\CheckoutApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,5 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('/card',    'CardResource');
+Route::resource('/card',    'Resource\CardResource');
 Route::post('/payment',     'CheckoutApi@payment');

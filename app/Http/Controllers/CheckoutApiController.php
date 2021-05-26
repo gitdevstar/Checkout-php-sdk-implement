@@ -51,7 +51,7 @@ class CheckoutApiController extends Controller
         $currency = $request->currency;
         try {
             $method = new TokenSource($token);
-            $payment = new Chekcout\Models\Payments\Payment($method, $currency); // GBP
+            $payment = new \Checkout\Models\Payments\Payment($method, $currency); // GBP
             $payment->amount = $amount;
             $result = $this->checkout->payments()->request($payment);
 
