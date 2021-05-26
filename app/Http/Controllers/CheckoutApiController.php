@@ -60,9 +60,9 @@ class CheckoutApiController extends Controller
                 'amount' => $amount,
                 'currency' => $currency,
                 'email' => 'test email',
-                'payment_id' => $result["id"],
-                'status' => $result["status"],
-                'source' => $result["source"]["type"]
+                'payment_id' => $result->id,
+                'status' => $result->status,
+                'source' => $result->source->type
             ]);
         } catch (\Throwable $th) {
             //throw $th;

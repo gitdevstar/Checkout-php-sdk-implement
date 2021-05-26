@@ -60,14 +60,16 @@ class CardResource extends Controller
 
 			$card = (new CheckoutApiController)->addCard($request);
 
-            Card::create([
-                'card_id' => $card["token"],
-                'last_four' => $card["last4"],
-                'holder_name' => $card["name"],
-                'brand' => $card["scheme"],
-            ]);
+            return response()->json($card);
 
-            return response()->json(['message' => 'Card Added Successfully', 'success' => true]);
+            // Card::create([
+            //     'card_id' => $card->token,
+            //     'last_four' => $card->last4,
+            //     'holder_name' => $card->name,
+            //     'brand' => $card->scheme,
+            // ]);
+
+            // return response()->json(['message' => 'Card Added Successfully', 'success' => true]);
 
         } catch(Exception $e){
             return response()->json($e->getMessage(), 500);
