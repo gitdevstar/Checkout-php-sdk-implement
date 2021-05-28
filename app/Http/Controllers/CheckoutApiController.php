@@ -12,15 +12,13 @@ use Checkout\CheckoutApi;
 use Checkout\Models\Tokens\Card;
 use Checkout\Models\Payments\TokenSource;
 
-use function PHPUnit\Framework\isNan;
-
 class CheckoutApiController extends Controller
 {
     protected static $secretKey = "sk_test_bcb8ffa7-8597-4eb2-9f7b-ad6cc0073f65";
     protected static $publicKey = "pk_test_9309fb5b-9fe1-4a45-a2a5-e594e14c9fe8";
     protected static $checkout;
     protected $curl;
-    protected $base_url = 'https://sandbox.checkout.com/';
+    protected $base_url = 'https://api.sandbox.checkout.com/';
     protected $version = '1.0.15';
 
     public function __construct()
@@ -94,14 +92,14 @@ class CheckoutApiController extends Controller
 
         try {
             $result = $this->request('get', 'reporting/payments', $params);
-            foreach($result as $payment) {
-                Payment::create([
-                    'amount' => $payment->actions[0]->breakdown->payout_currency_amount,
-                    'currency' => $payment->payout_currency,
-                    'payment_id' => $payment->id,
-                    'source' => $payment->payment_method,
-                ]);
-            }
+            // foreach($result as $payment) {
+            //     Payment::create([
+            //         'amount' => $payment->actions[0]->breakdown->payout_currency_amount,
+            //         'currency' => $payment->payout_currency,
+            //         'payment_id' => $payment->id,
+            //         'source' => $payment->payment_method,
+            //     ]);
+            // }
             return response()->json($result);
         } catch (\Throwable $th) {
             //throw $th;
@@ -132,8 +130,8 @@ class CheckoutApiController extends Controller
             );
 
              curl_setopt($this->curl, CURLOPT_URL, $url);
-             if(isset($params))
-                curl_setopt($this->curl, CURLOPT_POSTFIELDS, json_encode($postdata));
+            //  if(isset($params))
+            //     curl_setopt($this->curl, CURLOPT_POSTFIELDS, json_encode($postdata));
              curl_setopt($this->curl, CURLOPT_HTTPHEADER, $headers);
              $result = curl_exec($this->curl);
 			 $httpcode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
